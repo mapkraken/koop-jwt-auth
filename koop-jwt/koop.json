@@ -1,0 +1,13 @@
+{
+  "version": "1",
+  "npmClient": "npm",
+  "type": "app",
+  "plugins": [
+    {
+      "type": "provider",
+      "name": "koop-provider-pg",
+      "srcPath": "./src/koop-provider-pg",
+      "local": false
+    }
+  ]
+}

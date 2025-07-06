@@ -1,0 +1,18 @@
+
+services:
+
+  koop:
+    build: ./pg-koop
+    container_name: koop_JWT_server
+    ports:
+      - "9000:9000"
+    environment:
+      PORT: 9000
+      PG_HOST: host.docker.internal
+      PG_PORT: "5432"
+      PG_DATABASE: koop
+      PG_USER: koopuser
+      PG_PASSWORD: xH2hQ86vsDSZBnYgxSueM1HUS73Pfj0v
+      PG_OBJECTID: Gid
+      PG_LIMIT: "1000"
+      PG_SSL: "true"

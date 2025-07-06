@@ -1,0 +1,40 @@
+{
+  "name": "koop-jwt-auth-example",
+  "version": "0.1.0",
+  "description": "A Koop JWT authentication example",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "start:dev": "koop serve --watch --debug",
+    "test": "mocha 'test/**/*.test.js'",
+    "test:unit": "mocha 'test/jwt-utils.test.js'",
+    "test:integration": "mocha 'test/auth.test.js'",
+    "test:auth": "node scripts/test-auth.js",
+    "test:debug": "node scripts/debug-auth.js",
+    "test:watch": "mocha 'test/**/*.test.js' --watch",
+    "generate:test:jwt": "node ./scripts/generate-jwt.js",
+    "generate:salesforce:jwt": "node ./scripts/generate-salesforce-jwt.js",
+    "auth:health": "curl http://localhost:9000/auth/health"
+  },
+  "dependencies": {
+    "@koopjs/koop-core": "^10.1.0",
+    "config": "^3.3.12",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2"
+  },
+  "devDependencies": {
+    "@koopjs/cli": "^1.1.7",
+    "axios": "^1.10.0",
+    "chai": "^4.3.7",
+    "mocha": "^10.2.0"
+  },
+  "repository": "",
+  "private": true,
+  "keywords": [
+    "koop",
+    "jwt",
+    "authentication",
+    "example"
+  ]
+}

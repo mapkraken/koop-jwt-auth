@@ -1,0 +1,25 @@
+{
+  "name": "mapkraken-local",
+  "version": "1.0.0",
+  "description": "MapKraken local development environment with advanced spatial optimizations",
+  "scripts": {
+    "restart:optimized": "./restart-optimized.sh",
+    "migrate:tables": "./migrate-via-docker.sh",
+    "migrate:local": "cd pg-koop && node migrate-tables.js",
+    "restart:full": "./restart-optimized.sh && sleep 15 && ./migrate-via-docker.sh",
+    "start": "docker compose up -d",
+    "start:dev": "docker compose up",
+    "stop": "docker compose down",
+    "build": "docker compose build",
+    "logs": "docker compose logs -f",
+    "logs:pg-koop": "docker compose logs -f pg-koop",
+    "logs:postgis": "docker compose logs -f postgis",
+    "clean": "docker compose down && docker system prune -f",
+    "status": "docker compose ps",
+    "generate:test:jwt": "node ./pg-koop/scripts/generate-jwt.js",
+    "auth:health": "curl http://localhost:9000/auth/health"
+  },
+  "dependencies": {
+    "aws-cli": "^0.0.2"
+  }
+}
