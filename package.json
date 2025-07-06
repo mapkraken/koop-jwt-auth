@@ -1,25 +1,38 @@
 {
-  "name": "mapkraken-local",
+  "name": "koop-jwt-auth",
   "version": "1.0.0",
-  "description": "MapKraken local development environment with advanced spatial optimizations",
+  "description": "Example implementation of JWT authentication in a Koop application",
   "scripts": {
-    "restart:optimized": "./restart-optimized.sh",
-    "migrate:tables": "./migrate-via-docker.sh",
-    "migrate:local": "cd pg-koop && node migrate-tables.js",
-    "restart:full": "./restart-optimized.sh && sleep 15 && ./migrate-via-docker.sh",
-    "start": "docker compose up -d",
-    "start:dev": "docker compose up",
-    "stop": "docker compose down",
-    "build": "docker compose build",
-    "logs": "docker compose logs -f",
-    "logs:pg-koop": "docker compose logs -f pg-koop",
-    "logs:postgis": "docker compose logs -f postgis",
-    "clean": "docker compose down && docker system prune -f",
-    "status": "docker compose ps",
-    "generate:test:jwt": "node ./pg-koop/scripts/generate-jwt.js",
-    "auth:health": "curl http://localhost:9000/auth/health"
+    "docker:start": "docker compose up -d",
+    "docker:start:dev": "docker compose up",
+    "docker:stop": "docker compose down",
+    "docker:build": "docker compose build",
+    "docker:logs": "docker compose logs -f",
+    "docker:clean": "docker compose down && docker system prune -f",
+    "docker:status": "docker compose ps",
+    "generate:test:jwt": "node ./koop-jwt/scripts/generate-jwt.js",
+    "auth:health": "curl http://localhost:9000/auth/health",
+    "test": "cd koop-jwt && npm test",
+    "test:unit": "cd koop-jwt && npm run test:unit",
+    "test:integration": "cd koop-jwt && npm run test:integration",
+    "test:watch": "cd koop-jwt && npm run test:watch",
+    "start": "cd koop-jwt && npm start",
+    "dev": "cd koop-jwt && npm run dev",
+    "generate:jwt": "cd koop-jwt && node scripts/generate-jwt.js",
+    "test:auth": "cd koop-jwt && node scripts/test-auth.js",
+    "debug:auth": "cd koop-jwt && node scripts/debug-auth.js"
   },
-  "dependencies": {
-    "aws-cli": "^0.0.2"
-  }
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/koop-jwt-auth.git"
+  },
+  "keywords": [
+    "koop",
+    "jwt",
+    "authentication",
+    "salesforce",
+    "example"
+  ],
+  "author": "",
+  "license": "MIT"
 }
