@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Koop Universal Auth Carousel</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f5f5;
+            padding: 20px;
+        }
+
+        .carousel-container {
+            max-width: 1080px;
+            margin: 0 auto;
+            display: grid;
+            gap: 20px;
+        }
+
+        .slide {
+            width: 1080px;
+            height: 1080px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 60px;
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .slide::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 30% 20%, rgba(255,255,255,0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .slide-number {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            background: rgba(255,255,255,0.2);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .slide h1 {
+            font-size: 48px;
+            font-weight: 800;
+            margin-bottom: 30px;
+            line-height: 1.2;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        .slide h2 {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 40px;
+            line-height: 1.3;
+        }
+
+        .slide h3 {
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 30px;
+            color: #ffd700;
+        }
+
+        .slide p {
+            font-size: 20px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            opacity: 0.95;
+        }
+
+        .slide ul {
+            text-align: left;
+            font-size: 18px;
+            line-height: 1.8;
+            max-width: 800px;
+        }
+
+        .slide li {
+            margin-bottom: 15px;
+            position: relative;
+            padding-left: 30px;
+        }
+
+        .slide li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #ffd700;
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        .highlight {
+            background: rgba(255,215,0,0.3);
+            padding: 3px 8px;
+            border-radius: 6px;
+            font-weight: 600;
+        }
+
+        .architecture-before,
+        .architecture-after {
+            background: rgba(255,255,255,0.1);
+            padding: 30px;
+            border-radius: 15px;
+            margin: 20px 0;
+            border-left: 5px solid #ffd700;
+        }
+
+        .cost-savings {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+        }
+
+        .problem-slide {
+            background: linear-gradient(135deg, #fc466b 0%, #3f5efb 100%);
+        }
+
+        .solution-slide {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .benefits-slide {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+        }
+
+        .implementation-slide {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            color: #333;
+        }
+
+        .implementation-slide .slide-number {
+            color: #333;
+            background: rgba(0,0,0,0.1);
+        }
+
+        .cta-slide {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .code-block {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 25px;
+            border-radius: 10px;
+            font-family: 'Fira Code', 'Monaco', 'Cascadia Code', 'Roboto Mono', monospace;
+            font-size: 14px;
+            text-align: left;
+            margin: 20px 0;
+            max-width: 900px;
+            overflow-x: auto;
+            border: 1px solid #333;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+
+        .code-block .keyword {
+            color: #569cd6;
+            font-weight: 500;
+        }
+
+        .code-block .string {
+            color: #ce9178;
+        }
+
+        .code-block .function {
+            color: #dcdcaa;
+        }
+
+        .code-block .property {
+            color: #9cdcfe;
+        }
+
+        .code-block .comment {
+            color: #6a9955;
+            font-style: italic;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 30px 0;
+        }
+
+        .stat-item {
+            background: rgba(255,255,255,0.1);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 48px;
+            font-weight: 800;
+            color: #ffd700;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 16px;
+            margin-top: 10px;
+            opacity: 0.9;
+        }
+
+        @media print {
+            body { background: white; padding: 0; }
+            .carousel-container { gap: 0; }
+            .slide { page-break-after: always; margin: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="carousel-container">
+        
+        <!-- Slide 1: Title -->
+        <div class="slide">
+            <div class="slide-number">1/8</div>
+            <h1>One Server to Rule Them All</h1>
+            <p style="font-size: 24px; margin: 30px 0;">Using <span class="highlight">Koop</span> as Your Universal Authentication Provider</p>
+            <p>Stop maintaining multiple auth services. Let Koop handle authentication for your entire application ecosystem.</p>
+        </div>
+
+        <!-- Slide 2: The Problem -->
+        <div class="slide problem-slide">
+            <div class="slide-number">2/8</div>
+            <h2>The Hidden Costs of Separate Auth Services</h2>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <span class="stat-number">6+</span>
+                    <div class="stat-label">Services to maintain</div>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">$100</span>
+                    <div class="stat-label">Per user/year (Auth0/Okta)</div>
+                </div>
+            </div>
+            <ul>
+                <li>Authentication Service (Auth0, Okta)</li>
+                <li>API Gateway</li>
+                <li>Geospatial Server (Koop)</li>
+                <li>Session Management Service</li>
+                <li>Multiple points of failure</li>
+                <li>Complex security vulnerabilities</li>
+            </ul>
+        </div>
+
+        <!-- Slide 3: The Solution -->
+        <div class="slide solution-slide">
+            <div class="slide-number">3/8</div>
+            <h2>Koop as Your Universal Auth Provider</h2>
+            <h3>Before vs After</h3>
+            <div class="architecture-before">
+                <strong>Before:</strong><br>
+                React App → Auth Service → Session Store<br>
+                React App → API Gateway → Koop
+            </div>
+            <div class="architecture-after">
+                <strong>After:</strong><br>
+                React App → Koop (auth + geo + sessions)<br>
+                Mobile App → Koop (auth + geo + sessions)
+            </div>
+            <p><span class="highlight">One endpoint for everything!</span></p>
+        </div>
+
+        <!-- Slide 4: Real Benefits -->
+        <div class="slide benefits-slide">
+            <div class="slide-number">4/8</div>
+            <h2>Real Benefits, Real Savings</h2>
+            <ul>
+                <li><strong>Unified Authentication:</strong> One login flow for everything</li>
+                <li><strong>Built-in Session Management:</strong> No Redis needed</li>
+                <li><strong>Cost Reduction:</strong> Eliminate Auth0/Okta fees</li>
+                <li><strong>Simplified Frontend:</strong> One endpoint to rule them all</li>
+                <li><strong>Perfect for Salesforce:</strong> Seamless integration</li>
+            </ul>
+        </div>
+
+        <!-- Slide 5: Perfect for Salesforce -->
+        <div class="slide">
+            <div class="slide-number">5/8</div>
+            <h2>Perfect for Salesforce-Integrated Apps</h2>
+            <p style="font-size: 24px; margin-bottom: 40px;">This approach especially shines when:</p>
+            <ul>
+                <li>Your React app needs Salesforce authentication</li>
+                <li>Users need both geospatial and non-geospatial data</li>
+                <li>You want single sign-on across applications</li>
+                <li>Mobile and web apps share the same backend</li>
+            </ul>
+        </div>
+
+        <!-- Slide 6: Implementation -->
+        <div class="slide implementation-slide">
+            <div class="slide-number">6/8</div>
+            <h2 style="color: #333; margin-bottom: 20px;">Implementation in Your React App</h2>
+            <div class="code-block">
+    <pre><code class="language-javascript">
+        // Authenticate with Koop
+        const authenticateWithKoop = async (salesforceToken) => {
+          const response = await fetch('https://your-koop-server.com/auth/salesforce', {
+            method: 'POST',
+            body: JSON.stringify({ token: salesforceToken })
+          });
+        
+          const { sessionToken } = await response.json();
+        
+          // Use this token for ALL subsequent requests
+          localStorage.setItem('authToken', sessionToken);
+        };
+        </code></pre>
+            </div>
+            <p style="color: #333; margin-top: 20px;"><strong>One token for everything!</strong></p>
+        </div>
+
+        <!-- Slide 7: Beyond Geospatial -->
+        <div class="slide">
+            <div class="slide-number">7/8</div>
+            <h2>Koop: Your Universal Backend</h2>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <span class="stat-number">🔐</span>
+                    <div class="stat-label">Authentication Provider</div>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">🎫</span>
+                    <div class="stat-label">Session Manager</div>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">🗺️</span>
+                    <div class="stat-label">Geospatial Server</div>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">🚪</span>
+                    <div class="stat-label">API Gateway</div>
+                </div>
+            </div>
+            <p style="font-size: 24px; margin-top: 30px;">
+                <span class="highlight">One server, endless possibilities</span>
+            </p>
+        </div>
+
+        <!-- Slide 8: Call to Action -->
+        <div class="slide cta-slide">
+            <div class="slide-number">8/8</div>
+            <h1>Start Simple. Start Smart.</h1>
+            <p style="font-size: 28px; margin: 40px 0;">Why maintain separate auth services when Koop can handle it all?</p>
+            <ul style="text-align: center; list-style: none;">
+                <li style="font-size: 22px; margin: 20px 0;">✨ Seamless Salesforce integration</li>
+                <li style="font-size: 22px; margin: 20px 0;">🔄 Unified authentication across all services</li>
+                <li style="font-size: 22px; margin: 20px 0;">🎯 One token for everything</li>
+                <li style="font-size: 22px; margin: 20px 0;">⚡ Dramatically simplified infrastructure</li>
+            </ul>
+            <p style="font-size: 24px; margin-top: 50px; font-weight: 600;">
+                Ready to simplify your application architecture?
+            </p>
+        </div>
+
+    </div>
+
+    <script>
+        // Add print functionality
+        function printCarousel() {
+            window.print();
+        }
+        
+        // Add keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                const slides = document.querySelectorAll('.slide');
+                const current = document.querySelector('.slide:target') || slides[0];
+                const currentIndex = Array.from(slides).indexOf(current);
+                const nextIndex = (currentIndex + 1) % slides.length;
+                slides[nextIndex].scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+    </script>
+</body>
+</html>
