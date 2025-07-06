@@ -6,6 +6,7 @@
   "scripts": {
     "start": "node src/index.js",
     "start:dev": "koop serve --watch --debug",
+    "stop": "pkill -f \"node src/index.js\"",
     "test": "mocha 'test/**/*.test.js'",
     "test:unit": "mocha 'test/jwt-utils.test.js'",
     "test:integration": "mocha 'test/auth.test.js'",
